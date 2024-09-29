@@ -4,7 +4,7 @@ variable "efs_mount_point" {
 }
 
 variable "private_key_location" {
-  description = "Location of the private key" 
+  description = "Location of the private key"
   type        = string
 }
 

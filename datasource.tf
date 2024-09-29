@@ -9,7 +9,3 @@ data "aws_ami" "amazon_linux_ami" {
     ]
   }
 }
-
-data "local_file" "efs_tpl" {
-  filename = "./efs_mount.tpl"
-}

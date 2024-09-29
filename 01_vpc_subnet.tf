@@ -1,6 +1,6 @@
 # Create a VPC
 resource "aws_vpc" "my_vpc" {
-  cidr_block = "10.0.0.0/16"
+  cidr_block           = "10.0.0.0/16"
   enable_dns_hostnames = true
 
   tags = {
@@ -12,6 +12,7 @@ resource "aws_vpc" "my_vpc" {
 resource "aws_subnet" "public_subnet_1" {
   vpc_id                  = aws_vpc.my_vpc.id
   cidr_block              = "10.0.1.0/24"
+  availability_zone       = "ap-south-1a" # because  ap-south-1c doesnt have t2.micro available
   map_public_ip_on_launch = true
 
   tags = {
