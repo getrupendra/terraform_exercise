@@ -68,9 +68,10 @@ output "allow_efs_security_group_id" {
 }
 
 resource "aws_instance" "my_instance" {
-  ami           = data.aws_ami.amazon_linux_ami.id
-  instance_type = "t2.micro"
-  subnet_id     = aws_subnet.public_subnet_1.id
+  ami                  = data.aws_ami.amazon_linux_ami.id
+  instance_type        = "t2.micro"
+  subnet_id            = aws_subnet.public_subnet_1.id
+  iam_instance_profile = aws_iam_instance_profile.ec2_instance_profile.name
 
   vpc_security_group_ids = [aws_security_group.instance_sg.id]
   key_name               = aws_key_pair.deployer_key.key_name
@@ -84,7 +85,7 @@ resource "aws_instance" "my_instance" {
 
   user_data = <<-EOF
               #!/bin/bash
-              yum install -y amazon-efs-utils
+              yum install -y amazon-efs-utils aws-cli
               mkdir -p ${var.efs_mount_point}
               sudo mount -t efs -o tls ${aws_efs_file_system.file_system_1.id}:/ ${var.efs_mount_point}
               sudo echo "${aws_efs_file_system.file_system_1.id}:/ ${var.efs_mount_point} efs defaults,_netdev 0 0" >> /etc/fstab

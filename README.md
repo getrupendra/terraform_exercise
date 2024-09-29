@@ -14,3 +14,5 @@ export TF_VAR_aws_secret_key=<your aws secret key>
 export  TF_VAR_private_key_location  = "</path/to/store/privatekey/to/ssh_to_ec2>"
 ```
 
+Note: The IAM roles and permissions are not taken care. It is assumed that IAM user for terraform provisioning has all required permissions upfront. 
+
